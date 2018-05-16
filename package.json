@@ -1,0 +1,8 @@
+{
+  "name": "mt",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~4.5.1",
+    "jsonfile": "^2.4.0"
+  }
+}

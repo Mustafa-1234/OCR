@@ -1,0 +1,35 @@
+var csv = require('fast-csv');
+var fs = require('fs');
+const links = require('./links.js');
+
+var groundTruths = null;
+var result = [];
+var counter = 0;
+var stream = fs.createReadStream("test2.csv");
+var csvStream = csv({
+  delimiter: '	'
+})
+    .on("data", function(data){
+      if (counter++ === 1) {
+        groundTruths = data.map((row) => {
+          return row.trim();
+        });
+      } else if (counter > 1) {
+        const currentResult = data.map((col, index) => {
+          return {
+            groundTruth: groundTruths[index],
+            prediction: col === '' ? '' : col.trim(),
+            epoch: counter - 2
+          };
+        });
+        result.push(...currentResult);
+      }
+    })
+    .on("end", function(){
+      const out = {
+        nodes: result,
+        links
+      };
+      fs.writeFileSync('data2.json', JSON.stringify(out) , 'utf-8');
+    });
+stream.pipe(csvStream);

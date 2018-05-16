@@ -1,0 +1,241 @@
+/* Copyright 2013 Michael Bostock. All rights reserved. Do not copy. */
+
+@import url(//fonts.googleapis.com/css?family=PT+Serif|PT+Serif:b|PT+Serif:i|PT+Sans|PT+Sans:b);
+
+html {
+  min-width: 1040px;
+}
+
+.ocks-org body {
+  background: #fcfcfa;
+  color: #333;
+  font-family: "PT Serif", serif;
+  margin: 1em auto 4em auto;
+  position: relative;
+  width: 960px;
+}
+
+.ocks-org header,
+.ocks-org footer,
+.ocks-org aside,
+.ocks-org h1,
+.ocks-org h2,
+.ocks-org h3,
+.ocks-org h4 {
+  font-family: "PT Sans", sans-serif;
+}
+
+.ocks-org h1,
+.ocks-org h2,
+.ocks-org h3,
+.ocks-org h4 {
+  color: #000;
+}
+
+.ocks-org header,
+.ocks-org footer {
+  color: #636363;
+}
+
+h1 {
+  font-size: 64px;
+  font-weight: 300;
+  letter-spacing: -2px;
+  margin: .3em 0 .1em 0;
+}
+
+h2 {
+  margin-top: 2em;
+}
+
+h3 {
+  font-size: 34px;
+  font-weight: 100;
+  letter-spacing: -1px;
+  margin: .3em 0 .1em 0;
+  color: #000 !important;
+}
+}
+
+
+h1, h2 {
+  text-rendering: optimizeLegibility;
+}
+
+h2 a[name],
+h2 a[id] {
+  color: #ccc;
+  right: 100%;
+  padding: 0 .3em;
+  position: absolute;
+}
+
+header,
+footer {
+  font-size: small;
+}
+
+.ocks-org header aside,
+.ocks-org footer aside {
+  float: left;
+  margin-right: .5em;
+}
+
+.ocks-org header aside:after,
+.ocks-org footer aside:after {
+  padding-left: .5em;
+  content: "/";
+}
+
+footer {
+  margin-top: 8em;
+}
+
+h1 ~ aside {
+  font-size: small;
+  right: 0;
+  position: absolute;
+  width: 180px;
+}
+
+.attribution {
+  font-size: small;
+  margin-bottom: 2em;
+}
+
+body > p, li > p {
+  line-height: 1.5em;
+}
+
+body > p {
+  width: 720px;
+}
+
+body > blockquote {
+  width: 640px;
+}
+
+blockquote q {
+  display: block;
+  font-style: oblique;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  width: 690px;
+  margin-left: 30px;
+}
+
+a {
+  color: steelblue;
+}
+
+a:not(:hover) {
+  text-decoration: none;
+}
+
+pre, code, textarea {
+  font-family: "Menlo", monospace;
+}
+
+code {
+  line-height: 1em;
+}
+
+textarea {
+  font-size: 100%;
+}
+
+body > pre {
+  border-left: solid 2px #ccc;
+  padding-left: 18px;
+  margin: 2em 0 2em -20px;
+}
+
+.html .value,
+.javascript .string,
+.javascript .regexp {
+  color: #756bb1;
+}
+
+.html .tag,
+.css .tag,
+.javascript .keyword {
+  color: #3182bd;
+}
+
+.comment {
+  color: #636363;
+}
+
+.html .doctype,
+.javascript .number {
+  color: #31a354;
+}
+
+.html .attribute,
+.css .attribute,
+.javascript .class,
+.javascript .special {
+  color: #e6550d;
+}
+
+svg {
+  font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+sup, sub {
+  line-height: 0;
+}
+
+q:before {
+  content: "â€œ";
+}
+
+q:after {
+  content: "â€";
+}
+
+blockquote q {
+  line-height: 1.5em;
+  display: inline;
+}
+
+blockquote q:before,
+blockquote q:after {
+  content: "";
+}
+.tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
+  .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
+
+  /* Rounded corners */
+  .tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+  
+  /* Uncomment for shadow */
+  /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+  
+  .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
+  
+  /* Rules to colour arrows */
+  .tipsy-arrow-n { border-bottom-color: #000; }
+  .tipsy-arrow-s { border-top-color: #000; }
+  .tipsy-arrow-e { border-left-color: #000; }
+  .tipsy-arrow-w { border-right-color: #000; }
+  
+  .tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
+    .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
+  .tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
+    .tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
+  .tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
+  .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }

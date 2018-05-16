@@ -1,0 +1,137 @@
+body{
+	color:#fff;
+}
+h1{
+	color:#000;
+}
+.background {
+  fill: #eee;
+}
+
+line {
+  stroke: #fff;
+}
+
+text.active {
+  fill: red;
+}
+rect.highlight {
+  fill: none;
+  stroke: red;
+  stroke-width: 2;
+}
+.cell{
+  fill:#004d8f !important;
+}
+.mtooltip {
+  position: relative;
+  display: inline-block;
+  cursor:pointer;
+  top:5px;
+  left:5px;
+}
+
+.mtooltip:hover .mtooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.mmargin-top{
+	margin-top: 66%;
+}
+.sidebar{
+	min-height:500px;
+	background:#666;
+	border-right:1px solid #ccc ;
+}
+.mainbar{
+	margin-left: 50px
+}
+.mtooltip .mtooltiptext {
+    visibility: hidden;
+	width: 120px;
+	background-color: rgba(0,0,0,0.8);
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+	font-size:12px;
+	/* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.infoBarBottom{
+	bottom: 5%;
+    right: 10%;
+    color: #000;
+    position: fixed
+}
+
+.infoBarTop{
+	position: absolute;
+    right: 0;
+    top: 150px;
+    color: #000
+}
+
+.infoBarTop p span {
+	color: blue;
+	cursor: pointer;
+}
+
+.zoom{
+    transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    -ms-transition: all .5s;
+    cursor: pointer;
+}
+
+.zoom:hover {
+ transform : scale(2);
+ -moz-transform : scale(2);
+ -webkit-transform : scale(2);
+ -o-transform : scale(2);
+ -ms-transform : scale(2);
+}
+
+.foo {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  clear: both;
+  
+}
+
+.foo p{
+	margin-left: 200%;
+	clear: both;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
+.orange {
+  background: orange;
+}
+
+.green {
+  background: green;
+}
+
+.black {
+  background: black;
+}

@@ -1,0 +1,17 @@
+@import url(/stylesheets/style.css?aea6f0a);
+     .background {
+        fill: #eee;
+      }
+
+      line {
+        stroke: #fff;
+      }
+
+      text.active {
+        fill: red;
+      }
+      rect.highlight {
+          fill: none;
+          stroke: red;
+          stroke-width: 2;
+      }

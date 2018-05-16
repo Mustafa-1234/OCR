@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+    <title><%= title %></title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="/stylesheets/spiral.css">
+    <link rel="stylesheet" href="/stylesheets/custom.css">
+    <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script data-require="d3@4.0.0" data-semver="4.0.0" src="https://d3js.org/d3.v4.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.5.0/dist/svg-pan-zoom.min.js"></script> 
+
+    <style>
+
+
+      @import url(/stylesheets/style.css?aea6f0a);
+     
+
+    </style>
+
+
+    <script type="text/javascript">
+
+    function spiralSubmit() {
+      $("#mainForm").attr('action', '/test/spiral');
+      $("#mainForm").submit();
+    }
+
+    function normalSubmit() {
+      ("#mainForm").attr('action', '/test/epochValues');
+      $("#mainForm").submit();
+    }
+
+    $('document').ready(function(){
+      $("#viewChanger").live('change',function(e){
+        e.preventDefault();
+        selValue = $("#viewChanger").val();
+
+        if(selValue != 0){
+          $("#mainForm").attr('action', selValue);
+          
+          if(selValue == "/test/alphabetSpiral"){
+            filter = $("#filter").val();
+            if(filter.length != 0){
+              $("#mainForm").submit();  
+            }else{
+              $("#filter").parent().addClass("has-error");
+              $("#helpBlock2").html("Please insert some character");
+            }
+          }else{
+            $("#mainForm").submit();  
+          }
+          
+        }
+      });
+    });
+    </script>
+
+  </head>
+  <body>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="sidebar col-md-2">
+            <form action="/test/alphabetSpiral" method="post" id="mainForm" class="mmargin-top" enctype="multipart/form-data">
+              <input type="button" class="btn btn-info" value="Back to Home" onclick="window.location.href='http://localhost:3000/test/'" /><br><br>
+              <h5>Epoch Values :</h5>
+              <div class="form-group">
+                <input type="text" style="width:auto" class="col-md-11 form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="EpochMin" name="epochMin" id="epochMin" value="<%= minEpochs || 1 %>" />
+                  <div class="mtooltip"><i class="fa fa-info-circle" aria-hidden="true"></i>              
+                     <span class="mtooltiptext">Epoch is always a number. Please enter the minimum number of epoch you want to search.</span>
+                  </div>
+              </div><br>
+              <div class="form-group">  
+              <input type="text" style="width:auto" class="col-md-11 form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Epoch Max" name="epochMax" id="epochMax" value="<%= maxEpochs || epochs %>" />
+                <div class="mtooltip"><i class="fa fa-info-circle" aria-hidden="true"></i>               
+                   <span class="mtooltiptext">Epoch is always a number. Please enter the maximum number of epoch you want to search.</span>
+                </div>
+              </div>
+              <br>
+              <h5>Character :</h5>
+              <div class="form-group">  
+                <span id="helpBlock2" style= "color:#FFFFFF" class="help-block"></span>
+                <input type="text" class="form-control" id="filter" name="filter" value="<%= filters %>" placeholder="Filter Character" />
+              </div>
+              <br>
+              <h5>Select View :</h5>
+              <select class="form-control" name="viewChanger" id="viewChanger" >
+                  <option value="0">Please Select</option> 
+                  <option value="/test/epochValues" >Matrix View</option>
+                  <option value="/test/spiral" >Spiral View</option>
+                  <option disabled value="/test/alphabetSpiral" >Character View</option>
+              </select>
+              <br>
+              <button type="submit" class="btn btn-primary" id="normalSubmit" value="Upload/Refresh" name="nsubmit">Upload/Refresh</button>
+              </form>
+              
+          </div>
+          <div class="mainbar col-md-7">
+            <div class="row">
+            <h3>Spiral - Character View</h3>
+            <div id="graph" style="margin-top: 8%">
+            </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+             <div class="infoBarTop">
+               <p>This data set has <span><%= epochs %></span> epochs.</p>
+               <p>Total Character Selected: <span> <%= totalCharac %> </span></p>
+                <p><b>Note:</b> Scroll Up for Zoom In and <br> Scroll Down for Zoom Out.</p>
+             </div>
+             <div class="infoBarBottom">
+              <ul>
+              <h5>Color Representation: </h5>
+              <li class="foo red"><p>NumericValues</p></li><br>
+              <li class="foo blue"><p>LowerCase</p></li><br>
+              <li class="foo orange"><p>UpperCase</p></li><br>
+              <li class="foo green"><p>Symbols</p></li><br>
+              <li class="foo black"><p>ExceptionalLetters</p></li><br>
+              </ul>
+             </div> 
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+    <script>
+    $(document).ready(function(){
+      $(".sidebar").css('height', $(document).height());
+    });
+    /* implementation heavily influenced by http://bl.ocks.org/1166403 */
+
+    nodes = <%- JSON.stringify(nodes) %>;
+    graph = <%- JSON.stringify(graph) %>;
+
+    minEpochs = <%- JSON.stringify(minEpochs) %>;
+    maxEpochs = <%- JSON.stringify(maxEpochs) %>;
+
+    var maxNum = Math.max.apply(Math,graph.map(function(o){return o.value;}));
+
+    var range  = [minEpochs, maxEpochs];
+
+    console.log(maxNum);
+
+    //console.log(range[0]);
+
+    //console.log(nodes);
+    // Width and Height of bars
+    // var bar_width = 6, // set any number of width you want e.g bar_width = 30
+    //     bar_height = 15, // bar height
+    //     dynamic_width = (graph.length * bar_width);
+    var width = 1050, //width of graph
+      height = 580, //height of graph
+      start = 0,
+      end = 2.25,
+      numSpirals = 2
+      margin = {top:50,bottom:50,left:50,right:50};
+
+    var theta = function(r) {
+      return numSpirals * Math.PI * r;
+    };
+
+    // used to assign nodes color by group
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var r = d3.min([width, height]) / 2 - 20;
+
+    var radius = d3.scaleLinear()
+      .domain([start, end])
+      .range([20, r]);
+
+    var svg = d3.select("#graph").append("svg")
+      .attr("width", width + margin.right + margin.left)
+      .attr("height", height + margin.left + margin.right)
+      .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    var points = d3.range(start, end + 0.001, (end - start) / 1000);
+
+    var spiral = d3.radialLine()
+      .curve(d3.curveCardinal)
+      .angle(theta)
+      .radius(radius);
+
+    var path = svg.append("path")
+      .datum(points)
+      .attr("id", "spiral")
+      .attr("d", spiral)
+      .style("fill", "none")
+      .style("stroke-opacity", "0.3")
+      .style("stroke", "black")
+      .style("cursor", "pointer");
+
+    var spiralLength = path.node().getTotalLength(),
+        N = graph.length,
+        n = range[0],
+        barWidth = (spiralLength / N) - 1;
+    var someData = [];
+
+    //console.log(N);
+    
+    for (var i = 0; i < N; i++) {
+      //console.log(graph[i].character);
+      //var currentDate = new Date();
+      //currentDate.setDate(currentDate.getDate() + i);
+      someData.push({
+        charac: graph[i].character, 
+        epoch: i,
+        count: graph[i].value,
+        group: graph[i].color
+      });
+
+       // bar height
+    }
+    //console.log(spiralLength);
+    // Width and Height of bars
+    var bar_width = 11; // set any number of width you want e.g bar_width = 30
+    //bar_height = 10; // bar height
+
+
+    var timeScale = d3.scaleLinear()
+      .domain(d3.extent(someData, function(d){
+        return d.epoch;
+      }))
+      .range([0, spiralLength]);
+    
+    // yScale for the bar height
+    var yScale = d3.scaleLinear()
+      .domain([0, d3.max(someData, function(d){
+        return d.count;
+      })])
+      .range([0, (r / numSpirals) - 30]);
+
+    svg.selectAll("rect")
+      .data(someData)
+      .enter()
+      .append("rect")
+      .attr("x", function(d,i){
+        //console.log(timeScale(d.epoch));
+        var linePer = timeScale(d.epoch),
+            posOnLine = path.node().getPointAtLength(linePer),
+            angleOnLine = path.node().getPointAtLength(linePer - barWidth);
+      
+        d.linePer = linePer; // % distance are on the spiral
+        d.x = posOnLine.x; // x postion on the spiral
+        d.y = posOnLine.y; // y position on the spiral
+        
+        d.a = (Math.atan2(angleOnLine.y, angleOnLine.x) * 180 / Math.PI) - 90; //angle at the spiral position
+
+        return d.x;
+      })
+      .attr("y", function(d){
+        return d.y;
+      })
+      .attr("width", function(d){
+        return bar_width;
+      })
+      .attr("height", function(d){
+        if(d.count == 0){
+          return 20;
+        }else{
+          return ((d.count / maxNum) * 60) + 25;
+        }
+        //return (d.count / maxNum) * 30;
+
+      })
+      .style("fill", function(d){
+
+        //console.log(d.count/graph[N-1].value);
+        return d.group;
+      })
+      .style("opacity", function(d){
+
+        
+        return "1";
+        
+
+      })
+      .style("stroke",function(d){
+        
+          return d.group;
+        
+      })
+      //.style("stroke-width","1px")
+      .style("stroke-width", function(d){
+        
+          return '1px';
+        
+      })
+      .attr("transform", function(d){
+        return "rotate(" + d.a + "," + d.x  + "," + d.y + ")"; // rotate the bar
+      });
+    
+    //add date labels
+    var tF = d3.timeFormat("%b %Y"),
+        firstInMonth = {};
+
+    var tooltip = d3.select("#graph")
+    .append('div')
+    .attr('class', 'tooltip');
+
+    tooltip.append('div')
+    .attr('class', 'date');
+    tooltip.append('div')
+    .attr('class', 'value');
+
+    svg.selectAll("rect")
+    .on('mouseover', function(d) {
+
+        tooltip.select('.date').html("Character: <b>" + d.charac + "</b>");
+        tooltip.select('.value').html("Count: <b>" + d.count + "<b>");
+
+        d3.select(this)
+        .style("fill","#FFFFFF")
+        .style("stroke","#000000")
+        .style("stroke-width","1px");
+
+        tooltip.style('display', 'block');
+        tooltip.style('opacity',2);
+
+    })
+    .on('mousemove', function(d) {
+        tooltip.style('top', (d3.event.layerY + 10) + 'px')
+        .style('left', (d3.event.layerX - 25) + 'px');
+    })
+    .on('mouseout', function(d) {
+        d3.selectAll("rect")
+        .style("fill", function(d){
+            return d.group;
+          
+        })
+        .style("stroke",function(d){        
+            return d.group;
+          
+        })
+        .style("opacity", function(d){
+            return "1";
+          
+
+        })
+        .style("stroke-width", function(d){        
+            return '1px';
+          
+        })
+
+        tooltip.style('display', 'none');
+        tooltip.style('opacity',0);
+    });
+
+   
+    var panZoomTiger = svgPanZoom('#graph svg');
+  
+  //console.log(matrix);
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <style>
+			/* tell the SVG path to be a thin blue line without any area fill */
+			path {
+				stroke: steelblue;
+				stroke-width: 1;
+				fill: none;
+			}
+			
+			.axis {
+			  shape-rendering: crispEdges;
+			}
+
+			.x.axis line {
+			  stroke: lightgrey;
+			}
+
+			.x.axis .minor {
+			  stroke-opacity: .5;
+			}
+
+			.x.axis path {
+			  display: none;
+			}
+
+			.y.axis line, .y.axis path {
+			  fill: none;
+			  stroke: #000;
+			}
+		</style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+	
+	<div class="container">
+    	<div class="row">
+	    	<div id="graph" class="col-md-12" >
+			   	
+			</div>
+		</div>
+	</div>
+  	<script>
+		/* implementation heavily influenced by http://bl.ocks.org/1166403 */
+		
+		// define dimensions of graph
+		var m = [80, 80, 80, 80]; // margins
+		var w = 1000; // width
+		var h = 1000; // height
+		
+		// create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+		
+		var data = <%- JSON.stringify(links) %>;
+
+		var nodes = <%- JSON.stringify(nodes) %>;
+
+		var results = <%- JSON.stringify(results) %>;
+
+		//console.log(data);
+
+		// X scale will fit all values from data[] within pixels 0-w
+		var x = d3.scaleBand().domain(nodes).range([0, 1000]);
+		//var x = d3.extent(data, function(d) { return d.index; });
+		// Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+		
+		var y = d3.scaleBand().domain(nodes).range([1000, 0]);
+
+	
+			// automatically determining max range can work something like this
+			// var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+		//console.log(x.ticks(10))	
+		//console.log(data);	
+			
+		//create a line function that can convert data[] into x and y points
+<<<<<<< HEAD:app/views/test_old.ejs
+		// var line = d3.line()
+		// 	// assign the X function to plot our line as we wish
+		// 	.x(function(d,i) { 
+		// 		console.log(d);
+		// 		// verbose logging to show what's actually being done
+		// 		//console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+		// 		// return the X coordinate where we want to plot this datapoint
+		// 		return x(i); 
+		// 	})
+		// 	.y(function(d) { 
+		// 		// verbose logging to show what's actually being done
+		// 		//console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+		// 		// return the Y coordinate where we want to plot this datapoint
+		// 		return y(d); 
+		// 	})
+
+			// Add an SVG element with the desired dimensions and margin.
+			var graph = d3.select("#graph").append("svg")
+				  .datum(results)
+=======
+		var line = d3.line()
+			// assign the X function to plot our line as we wish
+			.x(function(d,i) { 
+				//console.log(d.x);
+				// verbose logging to show what's actually being done
+				//console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+				// return the X coordinate where we want to plot this datapoint
+				return d.x; 
+			})
+			.y(function(d) { 
+				//console.log(d.y);
+				// verbose logging to show what's actually being done
+				//console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+				// return the Y coordinate where we want to plot this datapoint
+				return d.y; 
+			});
+
+			// Add an SVG element with the desired dimensions and margin.
+			var graph = d3.select("#graph").append("svg")
+				  //.data(results)
+>>>>>>> e42a6da441de1dfca45d1f7af6f03ff62d78ee20:app/views/test.ejs
+			      .attr("width", w + m[1] + m[3])
+			      .attr("height", h + m[0] + m[2])
+			      .append("g")
+			      .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+			
+
+			// create yAxis
+			var xAxis = d3.axisTop(x);
+			// Add the x-axis.
+			graph.append("g")
+
+			      .attr("class", "x axis")
+			      .attr("transform", "translate(0,0)")
+			      .call(xAxis);
+
+
+			// create left yAxis
+			var yAxisLeft = d3.axisLeft(y);
+			// Add the y-axis to the left
+			graph.append("g")
+			      .attr("class", "y axis")
+			      .attr("transform", "translate(-25,0)")
+			      .call(yAxisLeft);
+			
+  			// Add the line by appending an svg:path element with the data line we created above
+			// do this AFTER the axes above so that the line is above the tick-lines
+  			//graph.append("path").attr("d", line(results));
+
+<<<<<<< HEAD:app/views/test_old.ejs
+  			// Create a group for each row in the data matrix and
+			// translate the group vertically
+			graph.append("g")
+			    .data(results)
+			    .enter()
+			    .append('g')
+			    .attr('transform', function(d, i) {
+			    	console.log(d.length);
+
+			        return 'translate(0, ' + 15 * d[0][1] + ')';
+			    });
+
+			var rw = 10;
+			var rh = 10;    
+
+			// For each group, create a set of rectangles and bind 
+			// them to the inner array (the inner array is already
+			// binded to the group)
+			graph.selectAll('rect')
+			    .data(function(d) { return d; })
+			    .enter()
+			    .append('rect')
+			        .attr('x', function(d, i) {
+			         //console.log(i);
+			         return 15 * d[0][0]; 
+			     	})
+			        .attr('width', rw)
+			        .attr('height', rh);
+=======
+			//var svgContainer = d3.select("#graph").append("svg")
+								// .attr("width", w + m[1] + m[3])
+								// .attr("height", h + m[0] + m[2]);
+
+			var rectangles = graph.selectAll("rect")
+							.data(results)
+							.enter()
+							.append("rect");
+			var rectangleAttributes = rectangles
+									.attr("x", function (d) { return d.x; })
+									.attr("y", function (d) { return d.y; })
+									.attr("height", 5)
+                          			.attr("width", 5)
+                          			.style("fill", 'red');
+			
+
+>>>>>>> e42a6da441de1dfca45d1f7af6f03ff62d78ee20:app/views/test.ejs
+			
+
+	</script>
+  </body>
+</html>

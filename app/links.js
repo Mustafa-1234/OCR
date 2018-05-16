@@ -1,0 +1,407 @@
+module.exports = [{
+    "Source": "0",
+    "Target": "0"
+
+  }, {
+    "Source": "1",
+    "Target": "1"
+
+  }, {
+    "Source": "2",
+    "Target": "2"
+
+  }, {
+    "Source": "3",
+    "Target": "3"
+
+  }, {
+    "Source": "4",
+    "Target": "4"
+
+  }, {
+    "Source": "5",
+    "Target": "5"
+
+  }, {
+    "Source": "6",
+    "Target": "6"
+
+  }, {
+    "Source": "7",
+    "Target": "7"
+
+  }, {
+    "Source": "8",
+    "Target": "8"
+
+  }, {
+    "Source": "9",
+    "Target": "9"
+
+  }, {
+    "Source": "a",
+    "Target": "a"
+
+  }, {
+    "Source": "b",
+    "Target": "b "
+
+  }, {
+    "Source": "c",
+    "Target": "c"
+
+  }, {
+    "Source": "d",
+    "Target": "d"
+
+  }, {
+    "Source": "e",
+    "Target": "e"
+
+  }, {
+    "Source": "f",
+    "Target": "f"
+
+  }, {
+    "Source": "g",
+    "Target": "g"
+
+  }, {
+    "Source": "h",
+    "Target": "h"
+
+  }, {
+    "Source": "i",
+    "Target": "i"
+
+  }, {
+    "Source": "j",
+    "Target": "j"
+
+  }, {
+    "Source": "k",
+    "Target": "k"
+
+  }, {
+    "Source": "l",
+    "Target": "l"
+
+  }, {
+    "Source": "m",
+    "Target": "m"
+
+  }, {
+    "Source": "n",
+    "Target": "n"
+
+  }, {
+    "Source": "o",
+    "Target": "o"
+
+  }, {
+    "Source": "p",
+    "Target": "p"
+
+  }, {
+    "Source": "q",
+    "Target": "q"
+
+  }, {
+    "Source": "r",
+    "Target": "r"
+
+  }, {
+    "Source": "s",
+    "Target": "s"
+
+  }, {
+    "Source": "t",
+    "Target": "t"
+
+  }, {
+    "Source": "u",
+    "Target": "u"
+
+  }, {
+    "Source": "v",
+    "Target": "v"
+
+  }, {
+    "Source": "w",
+    "Target": "w"
+
+  }, {
+    "Source": "x",
+    "Target": "x"
+
+  }, {
+    "Source": "y",
+    "Target": "y"
+
+  }, {
+    "Source": "z",
+    "Target": "z"
+
+  }, {
+    "Source": "ä",
+    "Target": "ä"
+
+  }, {
+    "Source": "ö",
+    "Target": "ö"
+
+  }, {
+    "Source": "ü",
+    "Target": "ü"
+
+  }, {
+    "Source": "A",
+    "Target": "A"
+
+  }, {
+    "Source": "B",
+    "Target": "B"
+
+  }, {
+    "Source": "C",
+    "Target": "C"
+
+  }, {
+    "Source": "D",
+    "Target": "D"
+
+  }, {
+    "Source": "E",
+    "Target": "E"
+
+  }, {
+    "Source": "F",
+    "Target": "F"
+
+  }, {
+    "Source": "G",
+    "Target": "G"
+
+  }, {
+    "Source": "H",
+    "Target": "H"
+
+  }, {
+    "Source": "I",
+    "Target": "I"
+
+  }, {
+    "Source": "J",
+    "Target": "J"
+
+  }, {
+    "Source": "K",
+    "Target": "K"
+
+  }, {
+    "Source": "L",
+    "Target": "L"
+
+  }, {
+    "Source": "M",
+    "Target": "M"
+
+  }, {
+    "Source": "N",
+    "Target": "N"
+
+  }, {
+    "Source": "O",
+    "Target": "O"
+
+  }, {
+    "Source": "P",
+    "Target": "P"
+
+  }, {
+    "Source": "Q",
+    "Target": "Q"
+
+  }, {
+    "Source": "R",
+    "Target": "R"
+
+  }, {
+    "Source": "S",
+    "Target": "S"
+
+  }, {
+    "Source": "T",
+    "Target": "T"
+
+  }, {
+    "Source": "U",
+    "Target": "U"
+
+  }, {
+    "Source": "V",
+    "Target": "V"
+
+  }, {
+    "Source": "W",
+    "Target": "W"
+
+  }, {
+    "Source": "X",
+    "Target": "X"
+
+  }, {
+    "Source": "Y",
+    "Target": "Y"
+
+  }, {
+    "Source": "Z",
+    "Target": "Z"
+
+  }, {
+    "Source": "Ä",
+    "Target": "Ä"
+
+  }, {
+    "Source": "Ö",
+    "Target": "Ö"
+
+  }, {
+    "Source": "Ü",
+    "Target": "Ü"
+
+  }, {
+    "Source": "ß",
+    "Target": "ß"
+
+  }, {
+    "Source": "`",
+    "Target": "`"
+
+  }, {
+    "Source": "~",
+    "Target": "~"
+
+  }, {
+    "Source": "!",
+    "Target": "!"
+
+  }, {
+    "Source": "@",
+    "Target": "@"
+
+  }, {
+    "Source": "#",
+    "Target": "#"
+
+  }, {
+    "Source": "$",
+    "Target": "$"
+
+  }, {
+    "Source": "%",
+    "Target": "%"
+
+  }, {
+    "Source": "^",
+    "Target": "^"
+
+  }, {
+    "Source": "&",
+    "Target": "&"
+
+  }, {
+    "Source": "*",
+    "Target": "*"
+
+  }, {
+    "Source": "(",
+    "Target": "("
+
+  }, {
+    "Source": ")",
+    "Target": ")"
+
+  }, {
+    "Source": "-",
+    "Target": "-"
+
+  }, {
+    "Source": "_",
+    "Target": "_"
+
+  }, {
+    "Source": "=",
+    "Target": "="
+
+  }, {
+    "Source": "+",
+    "Target": "+"
+
+  }, {
+    "Source": "[",
+    "Target": "["
+
+  }, {
+    "Source": "]",
+    "Target": "]"
+
+  }, {
+    "Source": "\\",
+    "Target": "\\"
+
+  }, {
+    "Source": "{",
+    "Target": "{"
+
+  }, {
+    "Source": "}",
+    "Target": "}"
+
+  }, {
+    "Source": "|",
+    "Target": "|"
+
+  }, {
+    "Source": ";",
+    "Target": ";"
+
+  }, {
+    "Source": "'",
+    "Target": "'"
+
+  }, {
+    "Source": ":",
+    "Target": ":"
+
+  }, {
+    "Source": "",
+    "Target": ""
+
+  }, {
+    "Source": ",",
+    "Target": ","
+
+  }, {
+    "Source": ".",
+    "Target": "."
+
+  }, {
+    "Source": "/",
+    "Target": "/"
+
+  }, {
+    "Source": "<",
+    "Target": "<"
+
+  }, {
+    "Source": ">",
+    "Target": ">"
+
+  }, {
+    "Source": "?",
+    "Target": "?"
+
+  }
+
+]
